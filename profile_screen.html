@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nukie - Profile Screen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Import our design system */
+        @import url('../color_palette.css');
+        @import url('../dot_matrix_font.css');
+        @import url('../ui_components.css');
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--background-cream);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding-bottom: 60px; /* Space for bottom nav */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Dot Matrix Background */
+        .dot-matrix-container {
+            position: relative;
+        }
+
+        .dot-matrix-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 8px 8px;
+            pointer-events: none;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        /* App Header */
+        .app-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .app-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            padding: 24px 16px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--nukie-orange);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .profile-username {
+            color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+
+        .profile-bio {
+            margin-bottom: 16px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .profile-stat {
+            text-align: center;
+        }
+
+        .profile-stat-value {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .profile-stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .profile-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* Connected Accounts */
+        .connected-accounts {
+            padding: 16px;
+            background-color: var(--white);
+            margin-top: 16px;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .account-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .account-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            border-radius: 4px;
+            background-color: var(--gray-100);
+            position: relative;
+        }
+
+        .account-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            opacity: 0.05;
+            border-radius: 4px;
+        }
+
+        .account-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .account-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .account-status {
+            font-size: 0.75rem;
+            color: var(--success-green);
+        }
+
+        /* Token System */
+        .token-system {
+            padding: 16px;
+            background-color: var(--white);
+            margin-top: 16px;
+            border-radius: 4px;
+        }
+
+        .token-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .token-card {
+            padding: 16px;
+            border-radius: 4px;
+            background-color: var(--gray-100);
+            text-align: center;
+            position: relative;
+        }
+
+        .token-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            opacity: 0.05;
+            border-radius: 4px;
+        }
+
+        .token-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .token-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .token-label {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+
+        /* Tabs */
+        .profile-tabs {
+            display: flex;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            margin-top: 16px;
+        }
+
+        .profile-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .profile-tab.active {
+            color: var(--nukie-orange);
+        }
+
+        .profile-tab.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--nukie-orange);
+            background-image: repeating-linear-gradient(
+                to right,
+                var(--nukie-orange) 0,
+                var(--nukie-orange) 2px,
+                transparent 2px,
+                transparent 4px
+            );
+        }
+
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background-color: var(--gray-200);
+        }
+
+        .post-thumbnail {
+            aspect-ratio: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-thumbnail::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        .post-platform {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        .platform-instagram {
+            background-color: #E1306C;
+        }
+
+        .platform-tiktok {
+            background-color: #000000;
+        }
+
+        .platform-youtube {
+            background-color: #FF0000;
+        }
+
+        .platform-bluesky {
+            background-color: #1DA1F2;
+        }
+
+        .platform-mastodon {
+            background-color: #6364FF;
+        }
+    </style>
+</head>
+<body class="dot-matrix-container">
+    <!-- App Header -->
+    <header class="app-header">
+        <div class="app-title text-dot-matrix">PROFILE</div>
+        <div class="header-actions">
+            <button class="nukie-btn nukie-btn-outline">
+                <span class="text-dot-matrix">SETTINGS</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <img src="https://via.placeholder.com/100" alt="User Avatar">
+        </div>
+        <h1 class="profile-name text-dot-matrix">Alex Johnson</h1>
+        <div class="profile-username">@alexjohnson</div>
+        <p class="profile-bio">Privacy advocate, social media minimalist, and dot matrix enthusiast. Keeping my data where it belongs - with me.</p>
+        <div class="profile-stats">
+            <div class="profile-stat">
+                <div class="profile-stat-value">248</div>
+                <div class="profile-stat-label">POSTS</div>
+            </div>
+            <div class="profile-stat">
+                <div class="profile-stat-value">1.2K</div>
+                <div class="profile-stat-label">FOLLOWING</div>
+            </div>
+            <div class="profile-stat">
+                <div class="profile-stat-value">3.5K</div>
+                <div class="profile-stat-label">FOLLOWERS</div>
+            </div>
+        </div>
+        <div class="profile-actions">
+            <button class="nukie-btn nukie-btn-primary">
+                <span class="text-dot-matrix">EDIT PROFILE</span>
+            </button>
+            <button class="nukie-btn nukie-btn-outline">
+                <span class="text-dot-matrix">SHARE</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Token System -->
+    <div class="container">
+        <div class="token-system">
+            <h2 class="section-title text-dot-matrix">YOUR TOKENS</h2>
+            <div class="token-cards">
+                <div class="token-card">
+                    <div class="token-icon">🎯</div>
+                    <div class="token-value">1,250</div>
+                    <div class="token-label">COOL POINTS</div>
+                </div>
+                <div class="token-card">
+                    <div class="token-icon">💎</div>
+                    <div class="token-value">85</div>
+                    <div class="token-label">COOL CREDS</div>
+                </div>
+                <div class="token-card">
+                    <div class="token-icon">🎟️</div>
+                    <div class="token-value">2</div>
+                    <div class="token-label">COOL PASSES</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Connected Accounts -->
+        <div class="connected-accounts">
+            <h2 class="section-title text-dot-matrix">
+                CONNECTED ACCOUNTS
+                <button class="nukie-btn nukie-btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                    <span class="text-dot-matrix">ADD</span>
+                </button>
+            </h2>
+            <div class="account-list">
+                <div class="account-item">
+                    <div class="account-icon">📸</div>
+                    <div class="account-name">Instagram</div>
+                    <div class="account-status">Connected</div>
+                </div>
+                <div class="account-item">
+                    <div class="account-icon">🎵</div>
+                    <div class="account-name">TikTok</div>
+                    <div class="account-status">Connected</div>
+                </div>
+                <div class="account-item">
+                    <div class="account-icon">▶️</div>
+                    <div class="account-name">YouTube</div>
+                    <div class="account-status">Connected</div>
+                </div>
+                <div class="account-item">
+                    <div class="account-icon">🔵</div>
+                    <div class="account-name">Bluesky</div>
+                    <div class="account-status">Connected</div>
+                </div>
+                <div class="account-item">
+                    <div class="account-icon">🐘</div>
+                    <div class="account-name">Mastodon</div>
+                    <div class="account-status">Connected</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Tabs -->
+    <div class="profile-tabs">
+        <div class="profile-tab active text-dot-matrix">POSTS</div>
+        <div class="profile-tab text-dot-matrix">SAVED</div>
+        <div class="profile-tab text-dot-matrix">ACTIVITY</div>
+    </div>
+
+    <!-- Posts Grid -->
+    <div class="posts-grid">
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-instagram"></div>
+        </div>
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-tiktok"></div>
+        </div>
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-youtube"></div>
+        </div>
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-bluesky"></div>
+        </div>
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-instagram"></div>
+        </div>
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-mastodon"></div>
+        </div>
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-youtube"></div>
+        </div>
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-tiktok"></div>
+        </div>
+        <div class="post-thumbnail">
+            <img src="https://via.placeholder.com/300" alt="Post Thumbnail">
+            <div class="post-platform platform-instagram"></div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="nukie-bottom-nav">
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">🏠</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">HOME</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">🔍</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">EXPLORE</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">➕</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">POST</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">🔔</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">ALERTS</div>
+        </div>
+        <div class="nukie-bottom-nav-item active">
+            <div class="nukie-bottom-nav-icon">👤</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">PROFILE</div>
+        </div>
+    </nav>
+</body>
+</html>

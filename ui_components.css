@@ -1,0 +1,426 @@
+/* Nukie Social Media Aggregator - UI Components */
+
+/* Base Component Styles */
+.nukie-component {
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot Matrix Overlay Effect */
+.dot-matrix-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+  background-size: 4px 4px;
+  pointer-events: none;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+/* Card Component */
+.nukie-card {
+  background-color: var(--white);
+  border: 1px solid var(--gray-300);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nukie-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nukie-card-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nukie-card-body {
+  padding: 16px;
+}
+
+.nukie-card-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Button Component */
+.nukie-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nukie-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--white) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.nukie-btn-primary {
+  background-color: var(--nukie-orange);
+  color: var(--white);
+}
+
+.nukie-btn-primary:hover {
+  background-color: var(--nukie-orange-dark);
+}
+
+.nukie-btn-secondary {
+  background-color: transparent;
+  border-color: var(--nukie-orange);
+  color: var(--nukie-orange);
+}
+
+.nukie-btn-secondary:hover {
+  background-color: rgba(255, 87, 51, 0.1);
+}
+
+.nukie-btn-outline {
+  background-color: transparent;
+  border-color: var(--gray-400);
+  color: var(--dark-gray);
+}
+
+.nukie-btn-outline:hover {
+  border-color: var(--nukie-orange);
+  color: var(--nukie-orange);
+}
+
+/* Input Component */
+.nukie-input-group {
+  margin-bottom: 16px;
+}
+
+.nukie-input-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.nukie-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid var(--gray-300);
+  border-radius: 4px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+  background-color: var(--white);
+}
+
+.nukie-input:focus {
+  outline: none;
+  border-color: var(--nukie-orange);
+  box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.1);
+}
+
+/* Toggle Switch */
+.nukie-toggle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.nukie-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.nukie-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-300);
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.nukie-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--white);
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .nukie-toggle-slider {
+  background-color: var(--nukie-orange);
+}
+
+input:checked + .nukie-toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* Navigation Bar */
+.nukie-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nukie-navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.nukie-navbar-brand img {
+  height: 32px;
+  margin-right: 8px;
+}
+
+.nukie-navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Bottom Navigation */
+.nukie-bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--white);
+  border-top: 1px solid var(--gray-200);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 0;
+  z-index: 100;
+}
+
+.nukie-bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  color: var(--gray-600);
+  transition: color 0.2s ease;
+}
+
+.nukie-bottom-nav-item.active {
+  color: var(--nukie-orange);
+}
+
+.nukie-bottom-nav-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.nukie-bottom-nav-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Feed Item */
+.nukie-feed-item {
+  border-bottom: 1px solid var(--gray-200);
+  padding: 16px;
+}
+
+.nukie-feed-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.nukie-feed-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nukie-feed-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nukie-feed-avatar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+  background-size: 2px 2px;
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+.nukie-feed-user-info {
+  flex: 1;
+}
+
+.nukie-feed-username {
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.nukie-feed-meta {
+  font-size: 12px;
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+}
+
+.nukie-feed-platform-icon {
+  margin-right: 4px;
+}
+
+.nukie-feed-content {
+  margin-bottom: 12px;
+}
+
+.nukie-feed-media {
+  margin-bottom: 12px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.nukie-feed-media img, 
+.nukie-feed-media video {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.nukie-feed-media::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  opacity: 0.05;
+}
+
+.nukie-feed-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nukie-feed-action {
+  display: flex;
+  align-items: center;
+  color: var(--gray-600);
+  transition: color 0.2s ease;
+}
+
+.nukie-feed-action:hover {
+  color: var(--nukie-orange);
+}
+
+.nukie-feed-action-icon {
+  margin-right: 4px;
+}
+
+/* Loading Indicator */
+.nukie-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.nukie-loading-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nukie-loading-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--nukie-orange);
+  border-radius: 50%;
+  animation: dot-pulse 1.5s infinite ease-in-out;
+}
+
+.nukie-loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.nukie-loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-pulse {
+  0%, 100% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .nukie-card-header,
+  .nukie-card-body,
+  .nukie-card-footer {
+    padding: 12px;
+  }
+  
+  .nukie-feed-media {
+    max-height: 300px;
+  }
+}

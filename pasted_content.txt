@@ -1,0 +1,14 @@
+We are creating a futuristic, privacy-first social media web app called NUKIE. It's a decentralized aggregator that lets users access feeds from TikTok, Instagram, X, YouTube, Bluesky, and Mastodon — all in one place. The platform doesn’t track or store personal data. All content is locally stored on the user’s device. NUKIE is ad-supported (Google Ads only), but offers an ad-free experience and multi-upload feature for $20/year or after earning 200 in-app rewards. We allow people to post to multiple platforms at once without needing to log in or share personal data with us. Users own their data, and nothing is stored on central servers. It’s fast, anonymous, clean, and beautiful.
+
+We want to pitch this as the “space-age control hub” for all your social media — designed for creators, rebels, privacy-lovers, and anyone tired of platform overload. The vibe is cosmic, modern, and user-first.
+
+Please generate the following:
+– Brand tagline options (3-5)
+– A landing page headline and subheadline that grabs attention
+– Key benefits in bullet form (with emojis or icons if possible)
+– A brief, emotional brand story (100–150 words)
+– A tone of voice guide that blends futuristic, rebellious, smart, and cool
+– Short copy for buttons and CTAs
+– Ad copy ideas for social and mobile promotion
+
+Use a style that feels like Apple meets Cyberpunk meets Mastodon — sleek but edgy, simple but powerful, mysterious but welcoming. Emphasize freedom, user control, and breaking away from big data social networks. We want people to feel like they’re entering a futuristic social control room built just for them.

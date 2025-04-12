@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.Nukie" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/nukie_orange</item>
+        <item name="colorPrimaryVariant">@color/nukie_orange_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/accent_blue</item>
+        <item name="colorSecondaryVariant">@color/accent_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/soft_black</item>
+        
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background_cream</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/dark_gray</item>
+        
+        <!-- Text colors -->
+        <item name="android:textColorPrimary">@color/dark_gray</item>
+        <item name="android:textColorSecondary">@color/gray_600</item>
+        
+        <!-- Custom font -->
+        <item name="fontFamily">@font/roboto_mono</item>
+        <item name="android:fontFamily">@font/roboto_mono</item>
+    </style>
+    
+    <!-- Text styles for dot matrix effect -->
+    <style name="TextAppearance.Nukie.DotMatrix" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/roboto_mono</item>
+        <item name="android:fontFamily">@font/roboto_mono</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    
+    <style name="TextAppearance.Nukie.DotMatrix.Headline" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/roboto_mono</item>
+        <item name="android:fontFamily">@font/roboto_mono</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    
+    <style name="TextAppearance.Nukie.DotMatrix.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/roboto_mono</item>
+        <item name="android:fontFamily">@font/roboto_mono</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    
+    <!-- Button styles -->
+    <style name="Widget.Nukie.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAppearance">@style/TextAppearance.Nukie.DotMatrix</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="cornerRadius">4dp</item>
+    </style>
+    
+    <style name="Widget.Nukie.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textAppearance">@style/TextAppearance.Nukie.DotMatrix</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="strokeColor">@color/nukie_orange</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+    
+    <!-- Card styles -->
+    <style name="Widget.Nukie.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="contentPadding">0dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+    
+    <!-- Bottom navigation styles -->
+    <style name="Widget.Nukie.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemTextAppearanceActive">@style/TextAppearance.Nukie.DotMatrix</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.Nukie.DotMatrix</item>
+        <item name="itemTextColor">@color/dark_gray</item>
+        <item name="itemIconTint">@color/dark_gray</item>
+        <item name="itemRippleColor">@color/nukie_orange_transparent</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Nukie.BottomNavigation.ActiveIndicator</item>
+    </style>
+    
+    <style name="Widget.Nukie.BottomNavigation.ActiveIndicator" parent="Widget.MaterialComponents.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/nukie_orange</item>
+    </style>
+</resources>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nukie - Home Screen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Import our design system */
+        @import url('../color_palette.css');
+        @import url('../dot_matrix_font.css');
+        @import url('../ui_components.css');
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--background-cream);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding-bottom: 60px; /* Space for bottom nav */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Dot Matrix Background */
+        .dot-matrix-container {
+            position: relative;
+        }
+
+        .dot-matrix-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 8px 8px;
+            pointer-events: none;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        /* App Header */
+        .app-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .app-logo {
+            height: 32px;
+        }
+
+        .app-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-left: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Feed Filters */
+        .feed-filters {
+            display: flex;
+            overflow-x: auto;
+            padding: 12px 16px;
+            gap: 8px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .feed-filter {
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            white-space: nowrap;
+            background-color: var(--gray-200);
+            color: var(--gray-700);
+            cursor: pointer;
+        }
+
+        .feed-filter.active {
+            background-color: var(--nukie-orange);
+            color: var(--white);
+        }
+
+        /* Feed Content */
+        .feed-container {
+            padding: 16px 0;
+        }
+
+        /* Platform Indicator */
+        .platform-indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .platform-instagram {
+            background-color: #E1306C;
+            color: white;
+        }
+
+        .platform-tiktok {
+            background-color: #000000;
+            color: white;
+        }
+
+        .platform-youtube {
+            background-color: #FF0000;
+            color: white;
+        }
+
+        .platform-bluesky {
+            background-color: #1DA1F2;
+            color: white;
+        }
+
+        .platform-mastodon {
+            background-color: #6364FF;
+            color: white;
+        }
+    </style>
+</head>
+<body class="dot-matrix-container">
+    <!-- App Header -->
+    <header class="app-header">
+        <div style="display: flex; align-items: center;">
+            <img src="../../assets/nukie-logo-dotmatrix.png" alt="Nukie Logo" class="app-logo">
+            <span class="app-title text-dot-matrix">NUKIE</span>
+        </div>
+        <div class="header-actions">
+            <button class="nukie-btn nukie-btn-outline">
+                <span class="text-dot-matrix">REFRESH</span>
+            </button>
+            <button class="nukie-btn nukie-btn-primary">
+                <span class="text-dot-matrix">POST</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Feed Filters -->
+    <div class="feed-filters">
+        <div class="feed-filter active">All Feeds</div>
+        <div class="feed-filter">Instagram</div>
+        <div class="feed-filter">TikTok</div>
+        <div class="feed-filter">YouTube</div>
+        <div class="feed-filter">Bluesky</div>
+        <div class="feed-filter">Mastodon</div>
+        <div class="feed-filter">Favorites</div>
+    </div>
+
+    <!-- Feed Content -->
+    <div class="container feed-container">
+        <!-- Feed Item 1 -->
+        <div class="nukie-card nukie-feed-item">
+            <div class="nukie-feed-header">
+                <div class="nukie-feed-avatar">
+                    <img src="https://via.placeholder.com/40" alt="User Avatar">
+                </div>
+                <div class="nukie-feed-user-info">
+                    <div class="nukie-feed-username">@designtrends</div>
+                    <div class="nukie-feed-meta">
+                        <span class="platform-indicator platform-instagram">Instagram</span>
+                        <span>2h ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nukie-feed-content">
+                <p>Check out this amazing dot matrix design inspiration! Perfect for retro-futuristic interfaces. #design #dotmatrix #retro</p>
+            </div>
+            <div class="nukie-feed-media">
+                <img src="https://via.placeholder.com/600x400" alt="Post Image">
+            </div>
+            <div class="nukie-feed-actions">
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">♥</span>
+                    <span>1.2k</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">💬</span>
+                    <span>42</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">↗</span>
+                    <span>Share</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">⭐</span>
+                    <span>Save</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feed Item 2 -->
+        <div class="nukie-card nukie-feed-item">
+            <div class="nukie-feed-header">
+                <div class="nukie-feed-avatar">
+                    <img src="https://via.placeholder.com/40" alt="User Avatar">
+                </div>
+                <div class="nukie-feed-user-info">
+                    <div class="nukie-feed-username">@techreviewer</div>
+                    <div class="nukie-feed-meta">
+                        <span class="platform-indicator platform-youtube">YouTube</span>
+                        <span>5h ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nukie-feed-content">
+                <p>New video: "How to Create a Dot Matrix Effect in CSS" - Learn how to build retro-inspired interfaces for modern web apps!</p>
+            </div>
+            <div class="nukie-feed-media">
+                <img src="https://via.placeholder.com/600x400" alt="Video Thumbnail">
+            </div>
+            <div class="nukie-feed-actions">
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">👍</span>
+                    <span>3.4k</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">💬</span>
+                    <span>156</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">↗</span>
+                    <span>Share</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">⭐</span>
+                    <span>Save</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feed Item 3 -->
+        <div class="nukie-card nukie-feed-item">
+            <div class="nukie-feed-header">
+                <div class="nukie-feed-avatar">
+                    <img src="https://via.placeholder.com/40" alt="User Avatar">
+                </div>
+                <div class="nukie-feed-user-info">
+                    <div class="nukie-feed-username">@privacyadvocate</div>
+                    <div class="nukie-feed-meta">
+                        <span class="platform-indicator platform-mastodon">Mastodon</span>
+                        <span>1d ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nukie-feed-content">
+                <p>Why client-side data storage is the future of privacy-first applications. No more worrying about your data being sold or compromised! #privacy #decentralized #ownyourdata</p>
+            </div>
+            <div class="nukie-feed-actions">
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">🔄</span>
+                    <span>89</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">⭐</span>
+                    <span>215</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">↗</span>
+                    <span>Share</span>
+                </div>
+                <div class="nukie-feed-action">
+                    <span class="nukie-feed-action-icon">⭐</span>
+                    <span>Save</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div class="nukie-loading">
+            <div class="nukie-loading-dots">
+                <div class="nukie-loading-dot"></div>
+                <div class="nukie-loading-dot"></div>
+                <div class="nukie-loading-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="nukie-bottom-nav">
+        <div class="nukie-bottom-nav-item active">
+            <div class="nukie-bottom-nav-icon">🏠</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">HOME</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">🔍</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">EXPLORE</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">➕</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">POST</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">🔔</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">ALERTS</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">👤</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">PROFILE</div>
+        </div>
+    </nav>
+</body>
+</html>

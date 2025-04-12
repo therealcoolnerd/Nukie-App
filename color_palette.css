@@ -1,0 +1,70 @@
+/* Nukie Social Media Aggregator - Color Palette */
+
+:root {
+  /* Primary Colors */
+  --nukie-orange: #FF5733;
+  --background-cream: #FFF8E7;
+  --dark-gray: #333333;
+  
+  /* Secondary Colors */
+  --light-orange: #FFAA80;
+  --soft-black: #1A1A1A;
+  --accent-blue: #4A90E2;
+  
+  /* UI Variations */
+  --nukie-orange-transparent: rgba(255, 87, 51, 0.8);
+  --nukie-orange-light: #FF8C66;
+  --nukie-orange-dark: #CC4529;
+  
+  /* Functional Colors */
+  --success-green: #28A745;
+  --warning-yellow: #FFC107;
+  --error-red: #DC3545;
+  --info-blue: #17A2B8;
+  
+  /* Grayscale */
+  --white: #FFFFFF;
+  --gray-100: #F8F9FA;
+  --gray-200: #E9ECEF;
+  --gray-300: #DEE2E6;
+  --gray-400: #CED4DA;
+  --gray-500: #ADB5BD;
+  --gray-600: #6C757D;
+  --gray-700: #495057;
+  --gray-800: #343A40;
+  --gray-900: #212529;
+  --black: #000000;
+}
+
+/* Dot Matrix Pattern Generator */
+.dot-matrix-bg {
+  background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+  background-size: 8px 8px;
+  background-color: var(--background-cream);
+}
+
+.dot-matrix-border {
+  border: 2px solid;
+  border-image: repeating-linear-gradient(
+    to right,
+    var(--nukie-orange) 0,
+    var(--nukie-orange) 2px,
+    transparent 2px,
+    transparent 4px
+  ) 2;
+}
+
+/* Theme Classes */
+.theme-light {
+  --text-color: var(--dark-gray);
+  --background-color: var(--background-cream);
+  --card-background: var(--white);
+  --border-color: var(--gray-300);
+}
+
+.theme-dark {
+  --text-color: var(--gray-200);
+  --background-color: var(--soft-black);
+  --card-background: var(--gray-800);
+  --border-color: var(--gray-700);
+}

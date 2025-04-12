@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nukie</string>
+    
+    <!-- Navigation Labels -->
+    <string name="nav_home">HOME</string>
+    <string name="nav_explore">EXPLORE</string>
+    <string name="nav_post">POST</string>
+    <string name="nav_alerts">ALERTS</string>
+    <string name="nav_profile">PROFILE</string>
+    
+    <!-- Feed Screen -->
+    <string name="feed_all">All Feeds</string>
+    <string name="feed_instagram">Instagram</string>
+    <string name="feed_tiktok">TikTok</string>
+    <string name="feed_youtube">YouTube</string>
+    <string name="feed_bluesky">Bluesky</string>
+    <string name="feed_mastodon">Mastodon</string>
+    <string name="feed_favorites">Favorites</string>
+    
+    <!-- Actions -->
+    <string name="action_refresh">REFRESH</string>
+    <string name="action_post">POST</string>
+    <string name="action_like">Like</string>
+    <string name="action_comment">Comment</string>
+    <string name="action_share">Share</string>
+    <string name="action_save">Save</string>
+    <string name="action_edit">EDIT</string>
+    <string name="action_settings">SETTINGS</string>
+    
+    <!-- Profile Screen -->
+    <string name="profile_title">PROFILE</string>
+    <string name="profile_edit">EDIT PROFILE</string>
+    <string name="profile_share">SHARE</string>
+    <string name="profile_posts">POSTS</string>
+    <string name="profile_saved">SAVED</string>
+    <string name="profile_activity">ACTIVITY</string>
+    <string name="profile_followers">FOLLOWERS</string>
+    <string name="profile_following">FOLLOWING</string>
+    
+    <!-- Token System -->
+    <string name="tokens_title">YOUR TOKENS</string>
+    <string name="tokens_cool_points">COOL POINTS</string>
+    <string name="tokens_cool_creds">COOL CREDS</string>
+    <string name="tokens_cool_passes">COOL PASSES</string>
+    
+    <!-- Connected Accounts -->
+    <string name="accounts_title">CONNECTED ACCOUNTS</string>
+    <string name="accounts_add">ADD</string>
+    <string name="accounts_connected">Connected</string>
+    
+    <!-- Post Creation -->
+    <string name="create_post_title">CREATE POST</string>
+    <string name="create_post_hint">What\'s on your mind? Share it across your social platforms...</string>
+    <string name="create_post_platforms">POST TO PLATFORMS</string>
+    <string name="create_post_settings">POST SETTINGS</string>
+    <string name="create_post_schedule">Schedule Post</string>
+    <string name="create_post_schedule_desc">Set a specific time to publish</string>
+    <string name="create_post_alt_text">Alt Text for Media</string>
+    <string name="create_post_alt_text_desc">Add accessibility descriptions</string>
+    <string name="create_post_advanced">Advanced Options</string>
+    <string name="create_post_advanced_desc">Platform-specific settings</string>
+    
+    <!-- Privacy -->
+    <string name="privacy_title">Your data stays on your device</string>
+    <string name="privacy_desc">Nukie doesn\'t store your content or credentials. Everything is processed locally and sent directly to the platforms you choose.</string>
+    
+    <!-- Error Messages -->
+    <string name="error_connection">Connection error. Please check your internet connection.</string>
+    <string name="error_auth">Authentication failed. Please reconnect your account.</string>
+    <string name="error_post_failed">Failed to post. Please try again.</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+</resources>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nukie - Post Creation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Import our design system */
+        @import url('../color_palette.css');
+        @import url('../dot_matrix_font.css');
+        @import url('../ui_components.css');
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--background-cream);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding-bottom: 60px; /* Space for bottom nav */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        /* Dot Matrix Background */
+        .dot-matrix-container {
+            position: relative;
+        }
+
+        .dot-matrix-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 8px 8px;
+            pointer-events: none;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        /* App Header */
+        .app-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .app-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Post Creation Form */
+        .post-form {
+            background-color: var(--white);
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .post-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 2px solid var(--gray-300);
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 16px;
+            resize: vertical;
+            margin-bottom: 16px;
+            background-color: var(--white);
+        }
+
+        .post-textarea:focus {
+            outline: none;
+            border-color: var(--nukie-orange);
+            box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.1);
+        }
+
+        .post-textarea::placeholder {
+            color: var(--gray-500);
+        }
+
+        .post-media-preview {
+            margin-bottom: 16px;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            display: none; /* Hidden by default, shown when media is added */
+        }
+
+        .post-media-preview img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+        .post-media-preview::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            opacity: 0.05;
+        }
+
+        .post-media-remove {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .post-action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .post-action-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            background-color: var(--gray-100);
+            color: var(--gray-700);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .post-action-button:hover {
+            background-color: var(--gray-200);
+        }
+
+        .post-action-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 2px 2px;
+            pointer-events: none;
+            opacity: 0.05;
+            border-radius: 4px;
+        }
+
+        .post-action-icon {
+            font-size: 20px;
+        }
+
+        .post-character-count {
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        /* Platform Selection */
+        .platform-selection {
+            margin-bottom: 16px;
+        }
+
+        .platform-selection-title {
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .platform-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .platform-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background-color: var(--gray-100);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .platform-option.selected {
+            background-color: rgba(255, 87, 51, 0.1);
+            border: 1px solid var(--nukie-orange);
+        }
+
+        .platform-option::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 2px 2px;
+            pointer-events: none;
+            opacity: 0.05;
+            border-radius: 4px;
+        }
+
+        .platform-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .platform-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Post Settings */
+        .post-settings {
+            background-color: var(--white);
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .post-settings-title {
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-weight: 500;
+        }
+
+        .setting-description {
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-top: 4px;
+        }
+
+        /* Privacy Indicator */
+        .privacy-indicator {
+            background-color: var(--gray-100);
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .privacy-indicator::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--dark-gray) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            opacity: 0.05;
+            border-radius: 4px;
+        }
+
+        .privacy-icon {
+            font-size: 24px;
+            margin-right: 12px;
+            color: var(--success-green);
+        }
+
+        .privacy-text {
+            flex: 1;
+        }
+
+        .privacy-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .privacy-description {
+            font-size: 12px;
+            color: var(--gray-700);
+        }
+    </style>
+</head>
+<body class="dot-matrix-container">
+    <!-- App Header -->
+    <header class="app-header">
+        <div class="app-title text-dot-matrix">CREATE POST</div>
+        <div class="header-actions">
+            <button class="nukie-btn nukie-btn-primary">
+                <span class="text-dot-matrix">POST</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Post Creation Form -->
+        <div class="post-form">
+            <textarea class="post-textarea" placeholder="What's on your mind? Share it across your social platforms..."></textarea>
+            
+            <!-- Media Preview (shown when media is added) -->
+            <div class="post-media-preview" style="display: block;">
+                <img src="https://via.placeholder.com/600x400" alt="Media Preview">
+                <div class="post-media-remove">✕</div>
+            </div>
+            
+            <div class="post-actions">
+                <div class="post-action-buttons">
+                    <div class="post-action-button">
+                        <span class="post-action-icon">📷</span>
+                    </div>
+                    <div class="post-action-button">
+                        <span class="post-action-icon">🎬</span>
+                    </div>
+                    <div class="post-action-button">
+                        <span class="post-action-icon">📊</span>
+                    </div>
+                    <div class="post-action-button">
+                        <span class="post-action-icon">😊</span>
+                    </div>
+                </div>
+                <div class="post-character-count">0/280</div>
+            </div>
+        </div>
+
+        <!-- Platform Selection -->
+        <div class="platform-selection">
+            <div class="platform-selection-title text-dot-matrix">POST TO PLATFORMS</div>
+            <div class="platform-options">
+                <div class="platform-option selected">
+                    <span class="platform-icon">📸</span>
+                    <span class="platform-name">Instagram</span>
+                </div>
+                <div class="platform-option selected">
+                    <span class="platform-icon">🎵</span>
+                    <span class="platform-name">TikTok</span>
+                </div>
+                <div class="platform-option">
+                    <span class="platform-icon">▶️</span>
+                    <span class="platform-name">YouTube</span>
+                </div>
+                <div class="platform-option selected">
+                    <span class="platform-icon">🔵</span>
+                    <span class="platform-name">Bluesky</span>
+                </div>
+                <div class="platform-option">
+                    <span class="platform-icon">🐘</span>
+                    <span class="platform-name">Mastodon</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Indicator -->
+        <div class="privacy-indicator">
+            <div class="privacy-icon">🔒</div>
+            <div class="privacy-text">
+                <div class="privacy-title">Your data stays on your device</div>
+                <div class="privacy-description">Nukie doesn't store your content or credentials. Everything is processed locally and sent directly to the platforms you choose.</div>
+            </div>
+        </div>
+
+        <!-- Post Settings -->
+        <div class="post-settings">
+            <div class="post-settings-title text-dot-matrix">POST SETTINGS</div>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Schedule Post</div>
+                    <div class="setting-description">Set a specific time to publish</div>
+                </div>
+                <label class="nukie-toggle">
+                    <input type="checkbox">
+                    <span class="nukie-toggle-slider"></span>
+                </label>
+            </div>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Alt Text for Media</div>
+                    <div class="setting-description">Add accessibility descriptions</div>
+                </div>
+                <button class="nukie-btn nukie-btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                    <span class="text-dot-matrix">ADD</span>
+                </button>
+            </div>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Advanced Options</div>
+                    <div class="setting-description">Platform-specific settings</div>
+                </div>
+                <button class="nukie-btn nukie-btn-outline" style="padding: 4px 8px; font-size: 12px;">
+                    <span class="text-dot-matrix">EDIT</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="nukie-bottom-nav">
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">🏠</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">HOME</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">🔍</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">EXPLORE</div>
+        </div>
+        <div class="nukie-bottom-nav-item active">
+            <div class="nukie-bottom-nav-icon">➕</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">POST</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">🔔</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">ALERTS</div>
+        </div>
+        <div class="nukie-bottom-nav-item">
+            <div class="nukie-bottom-nav-icon">👤</div>
+            <div class="nukie-bottom-nav-label text-dot-matrix">PROFILE</div>
+        </div>
+    </nav>
+</body>
+</html>
