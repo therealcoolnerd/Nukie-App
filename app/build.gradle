@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace 'com.nukie.app'
-    compileSdk 35
+    namespace 'com.nukie'
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.nukie.app"
-        minSdk 24
-        targetSdk 35
+        applicationId "com.nukie"
+        minSdk 21
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
